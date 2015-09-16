@@ -28,9 +28,6 @@ public class Problem21 implements Solvable {
 		}
 	
 		for(Integer i:map.keySet()){
-			if(i==220){
-				System.out.println(map.get(i)+ "   "+ map.get(map.get(i)));
-			}
 			Integer value=map.get(map.get(i));
 			if(value !=null && value.equals(i) && value!=map.get(i)){
 				total+=i;
