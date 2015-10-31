@@ -30,8 +30,8 @@ public class Runner {
 //       			prob.setParam(1000);
        			
        			
-       			Solvable prob=new Problem21();
-       			prob.setParam(100);
+       			Solvable prob=new Problem48();
+       			//prob.setParam(100);
 		run(prob);
 	}
 

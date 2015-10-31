@@ -6,8 +6,14 @@ import java.util.List;
 public class Prime {
 	public List<Long> primes;
 
+	public List<Long> getPrimes() {
+		return primes;
+	}
+	public void setPrimes(List<Long> primes) {
+		this.primes = primes;
+	}
 	public Prime() {
-		this.primes = new ArrayList<Long>();
+		this.primes = new ArrayList<Long>(1000000);
 	}
 	public Prime(List<Long> primes) {
 		this.primes = primes;
@@ -15,16 +21,59 @@ public class Prime {
 	
 	private boolean checkPrime(long i){
 		long max=(long)Math.sqrt(i);
+		boolean isPrime=false;
 		for(Long prime:primes){
 			if(i%prime.intValue()==0)
 				return false;
 			if(prime >max){
+				isPrime=true;
+				break;
+			}
+		}
+		if(isPrime){
+		if(primes.size() < 100000){
+		
+		primes.add(Long.valueOf(i));
+		
+		
+		return true;	
+		}
+		}
+		for(long j=primes.get(primes.size()-1);j<max;j+=2){
+			if(i%j==0) return false;
+		}
+		
+		return true;
+		
+		
+	}
+	
+	public long getLeastPrimeFactor(long i){
+		//long max=(long)Math.sqrt(i);
+		boolean isPrime=false;
+		for(Long prime:primes){
+			if(i%prime.intValue()==0)
+				return prime;
+			if(prime*prime >i){
+				isPrime=true;
 				break;
 			}
 		}
 		
-		primes.add(Long.valueOf(i));
-		return true;	
+		if(isPrime){
+			if(primes.size() < 100000){
+			
+			primes.add(Long.valueOf(i));
+			
+			
+			return i;	
+			}
+			}
+			for(long j=primes.get(primes.size()-1);j*j<i;j+=2){
+				if(i%j==0) return j;
+			}
+			
+			return i;
 		
 		
 	}
@@ -76,5 +125,16 @@ public List<Long> getPrimesInRange(long n){
 			}
 		}
 		return sum;
+	}
+	
+	public static void main(String[] args){
+		
+		Prime pr=new Prime();
+		List<Long> lst=pr.getPrimesInRange(100000000L);
+		System.out.println("Total in set"+lst.size());
+//		for(Long l:lst){
+//			System.out.println(l);
+//		}
+		
 	}
 }
